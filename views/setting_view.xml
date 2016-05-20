@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Setting-->
+        <record id="view_eb_setting_form" model="ir.ui.view">
+            <field name="name">eb.setting.form</field>
+            <field name="model">eb.setting</field>
+            <field name="arch" type="xml">
+                <form string="Setting ">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="Setting"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="eb_32_acquirer_institution"/>
+                            <field name="eb_33_agency_code"/>
+                            <field name="eb_34_cashier"/>
+                            <field name="eb_37_acquirer_sequence"/>
+                            <field name="eb_41_terminal"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_eb_setting_tree" model="ir.ui.view">
+            <field name="name">eb.setting.tree</field>
+            <field name="model">eb.setting</field>
+            <field name="arch" type="xml">
+                <tree string="Setting">
+                    <field name="name"/>
+                    <field name="eb_32_acquirer_institution"/>
+                    <field name="eb_33_agency_code"/>
+                    <field name="eb_34_cashier"/>
+                    <field name="eb_37_acquirer_sequence"/>
+                    <field name="eb_41_terminal"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_eb_setting_search" model="ir.ui.view">
+            <field name="name">eb.setting.search</field>
+            <field name="model">eb.setting</field>
+            <field name="arch" type="xml">
+                <search string="Setting of Personal Appreciation">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_eb_setting_view">
+            <field name="name">Setting</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">eb.setting</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_eb_setting_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new setting.
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

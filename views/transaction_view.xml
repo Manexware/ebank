@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Transaction of Personal Appreciation -->
+        <record id="view_eb_transaction_form" model="ir.ui.view">
+            <field name="name">eb.transaction.form</field>
+            <field name="model">eb.transaction</field>
+            <field name="arch" type="xml">
+                <form string="Transaction ">
+                    <sheet>
+                        <group>
+                            <field name="eb_3_transaction_type"/>
+                            <field name="eb_2_service_identifier"/>
+                            <field name="eb_4_total_value" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                            <field name="eb_11_location_code" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                            <field name="eb_12_local_transaction_time"/>
+                            <field name="eb_13_local_transaction_date"/>
+                            <field name="eb_15_compensation_date" attrs="{'invisible':[('eb_3_transaction_type','!=','000001')]}"/>
+                            <field name="eb_19_consult_criterion" attrs="{'invisible':[('eb_3_transaction_type','!=','000003')],
+                                        'required':[('eb_3_transaction_type','=','000003')]}"/>
+                            <field name="eb_23_service_type"/>
+                            <field name="eb_28_doc" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                            <field name="eb_32_setting_id"/>
+                            <field name="eb_42_pay_id" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
+                                        'required':[('eb_3_transaction_type','=','000002')]}"/>
+                            <field name="eb_43_back_reason" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
+                                        'required':[('eb_3_transaction_type','=','000002')]}"/>
+                            <field name="eb_45_name_lastname" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                            <field name="eb_48_address" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                            <field name="eb_49_currency_type" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                        'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_eb_transaction_tree" model="ir.ui.view">
+            <field name="name">eb.transaction.tree</field>
+            <field name="model">eb.transaction</field>
+            <field name="arch" type="xml">
+                <tree string="Transaction ">
+                    <field name="name"/>
+                    <field name="eb_3_transaction_type"/>
+                    <field name="eb_2_service_identifier"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_eb_transaction_search" model="ir.ui.view">
+            <field name="name">eb.transaction.search</field>
+            <field name="model">eb.transaction</field>
+            <field name="arch" type="xml">
+                <search string="Transaction">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_eb_transaction_view">
+            <field name="name">Transaction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">eb.transaction</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_eb_transaction_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new transaction.
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

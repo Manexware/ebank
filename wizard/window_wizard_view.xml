@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+     <data>
+         <record id="window_wizard_form" model="ir.ui.view">
+            <field name="name">window_wizard_form</field>
+            <field name="model">eb.window.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Window">
+                    <group>
+                        <field name="eb_3_transaction_type"/>
+                        <field name="eb_2_service_identifier"/>
+                        <field name="eb_4_total_value" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="eb_11_location_code" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="eb_12_local_transaction_time"/>
+                        <field name="eb_13_local_transaction_date"/>
+                        <field name="eb_15_compensation_date" attrs="{'invisible':[('eb_3_transaction_type','!=','000001')]}"/>
+                        <field name="eb_19_consult_criterion" attrs="{'invisible':[('eb_3_transaction_type','!=','000003')],
+                                    'required':[('eb_3_transaction_type','=','000003')]}"/>
+                        <field name="eb_23_service_type"/>
+                        <field name="eb_28_doc" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="eb_32_setting_id"/>
+                        <field name="eb_42_pay_id" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
+                                    'required':[('eb_3_transaction_type','=','000002')]}"/>
+                        <field name="eb_43_back_reason" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
+                                    'required':[('eb_3_transaction_type','=','000002')]}"/>
+                        <field name="eb_45_name_lastname" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="eb_48_address" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="eb_49_currency_type" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
+                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                    </group>
+                    <footer>
+                        <button name="consult" string="Consult" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000003')]}"/>
+                        <button name="back" string="Back" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000002')]}"/>
+                        <button name="pay" string="Pay" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000001')]}"/>
+                        or<button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+         </record>
+
+         <record id="window_wizard_action" model="ir.actions.act_window">
+             <field name="name">Window</field>
+             <field name="res_model">eb.window.wizard</field>
+             <field name="type">ir.actions.act_window</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">form</field>
+             <field name="view_id" ref="window_wizard_form"/>
+             <field name="context">{}</field>
+             <field name="target">new</field>
+       </record>
+     </data>
+ </openerp>
