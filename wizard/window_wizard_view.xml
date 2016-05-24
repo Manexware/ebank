@@ -9,20 +9,27 @@
                 <form string="Window">
                     <group>
                         <field name="eb_3_transaction_type"/>
-                        <field name="eb_2_service_identifier"/>
-                        <field name="eb_4_total_value" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
-                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
-                        <field name="eb_11_location_code" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
-                                    'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
-                        <field name="eb_12_local_transaction_time"/>
-                        <field name="eb_13_local_transaction_date"/>
-                        <field name="eb_15_compensation_date" attrs="{'invisible':[('eb_3_transaction_type','!=','000001')]}"/>
-                        <field name="eb_19_consult_criterion" attrs="{'invisible':[('eb_3_transaction_type','!=','000003')],
-                                    'required':[('eb_3_transaction_type','=','000003')]}"/>
-                        <field name="eb_23_service_type"/>
+                        <field name="platform"/>
+                        <field name="eb_2_service_identifier" attrs="{'invisible':[('flag_eb_2','=',False)],
+                                    'required':[('flag_eb_2','=',True)]}"/>
+                        <field name="eb_4_total_value" attrs="{'invisible':[('flag_eb_4','=',False)],
+                                    'required':[('flag_eb_4','=',True)]}"/>
+                        <field name="eb_11_location_code" attrs="{'invisible':[('flag_eb_11','=',False)],
+                                    'required':[('flag_eb_11','=',True)]}"/>
+                        <field name="eb_12_local_transaction_time" attrs="{'invisible':[('flag_eb_12','=',False)],
+                                    'required':[('flag_eb_12','=',True)]}"/>
+                        <field name="eb_13_local_transaction_date" attrs="{'invisible':[('flag_eb_13','=',False)],
+                                    'required':[('flag_eb_13','=',True)]}"/>
+                        <field name="eb_15_compensation_date" attrs="{'invisible':[('flag_eb_15','=',False)],
+                                    'required':[('flag_eb_15','=',True)]}"/>
+                        <field name="eb_19_consult_criterion" attrs="{'invisible':[('flag_eb_19','=',False)],
+                                    'required':[('flag_eb_19','=',True)]}"/>
+                        <field name="eb_23_service_type" attrs="{'invisible':[('flag_eb_23','=',False)],
+                                    'required':[('flag_eb_23','=',True)]}"/>
                         <field name="eb_28_doc" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
                                     'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
-                        <field name="eb_32_setting_id"/>
+                        <field name="eb_32_setting_id" attrs="{'invisible':[('flag_eb_32','=',False)],
+                                    'required':[('flag_eb_32','=',True)]}"/>
                         <field name="eb_42_pay_id" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
                                     'required':[('eb_3_transaction_type','=','000002')]}"/>
                         <field name="eb_43_back_reason" attrs="{'invisible':[('eb_3_transaction_type','!=','000002')],
@@ -33,6 +40,15 @@
                                     'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
                         <field name="eb_49_currency_type" attrs="{'invisible':[('eb_3_transaction_type','!=','000002'),('eb_3_transaction_type','!=','000001')],
                                     'required':['|',('eb_3_transaction_type','=','000002'),('eb_3_transaction_type','=','000001')]}"/>
+                        <field name="flag_eb_2" invisible="1" />
+                        <field name="flag_eb_4" invisible="1" />
+                        <field name="flag_eb_11" invisible="1"/>
+                        <field name="flag_eb_12" invisible="1"/>
+                        <field name="flag_eb_13" invisible="1"/>
+                        <field name="flag_eb_15" invisible="1"/>
+                        <field name="flag_eb_19" invisible="1"/>
+                        <field name="flag_eb_23" invisible="1"/>
+                        <field name="flag_eb_32" invisible="1"/>
                     </group>
                     <footer>
                         <button name="consult" string="Consult" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000003')]}"/>
