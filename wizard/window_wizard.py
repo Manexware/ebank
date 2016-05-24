@@ -32,7 +32,7 @@ class WindowWizard(models.TransientModel):
     eb_48_address = fields.Char(size=200, default='Polaris')
     eb_49_currency_type = fields.Char(size=3, default='USD')
     eb_70_administrative_transaction_code = fields.Char()
-    mit = fields.Char()
+    mit = fields.Selection(misc.MIT)
     telephony = fields.Char()
     response = fields.Char()
 
@@ -134,8 +134,10 @@ class WindowWizard(models.TransientModel):
         self._check_a()
         back = self.env['eb.transaction']
         back.create({'eb_2_service_identifier':self.eb_2_service_identifier,
-                        'eb_3_transaction_type':self.eb_3_transaction_type,
-                        'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
+                     'eb_3_transaction_type':self.eb_3_transaction_type,
+                     'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
+        self.eb_2_service_identifier = ''
+        self.eb_32_setting_id = ''
         self.eb_3_transaction_type = '000003'
         return {
             'context': self.env.context,
@@ -156,8 +158,8 @@ class WindowWizard(models.TransientModel):
         self._check_a()
         pay = self.env['eb.transaction']
         pay.create({'eb_2_service_identifier':self.eb_2_service_identifier,
-                        'eb_3_transaction_type':self.eb_3_transaction_type,
-                        'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
+                    'eb_3_transaction_type':self.eb_3_transaction_type,
+                    'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
         self.eb_3_transaction_type = '000002'
         return {
             'context': self.env.context,
