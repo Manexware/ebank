@@ -6,6 +6,12 @@ import datetime
 import pytz
 import re
 
+from ..ISO8583.ISO8583CNT import ISO8583CNT
+from ..ISO8583.ISOErrors import *
+import socket
+import sys
+import time
+
 
 class WindowWizard(models.TransientModel):
 
@@ -35,6 +41,17 @@ class WindowWizard(models.TransientModel):
     mit = fields.Char()
     telephony = fields.Char()
     response = fields.Char()
+
+    # Configure the client
+    serverIP = "192.168.0.103"
+    serverPort = 8583
+    numberEcho = 5
+    timeBetweenEcho = 5  # in seconds
+
+    bigEndian = True
+    # bigEndian = False
+
+    s = None
 
     @api.one
     @api.onchange('eb_2_service_identifier','eb_11_location_code','eb_42_pay_id')
@@ -110,11 +127,21 @@ class WindowWizard(models.TransientModel):
     @api.multi
     def consult(self):
         self._check_num()
+
+        #message = self.createMessage(3, 'F')
+        #self.connect()
+        #self.sendMessage(message, 3, 'F')
+
         consult = self.env['eb.transaction']
         consult.create({'eb_2_service_identifier':self.eb_2_service_identifier,
                         'eb_3_transaction_type':self.eb_3_transaction_type,
                         'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
-        self.eb_3_transaction_type = '000001'
+        self.eb_3_transaction_type = '000002'
+
+        # ubicar este codigo en el close del wizard
+        #if self.s is not None:
+            #self.s.close()
+
         return {
             'context': self.env.context,
             'view_type': 'form',
@@ -132,11 +159,17 @@ class WindowWizard(models.TransientModel):
         self._check_alphanum()
         self._check_size()
         self._check_a()
+
+        #message = self.createMessage(2, 'F')
+        #self.connect()
+        #self.sendMessage(message, 2, 'F')
+
         back = self.env['eb.transaction']
         back.create({'eb_2_service_identifier':self.eb_2_service_identifier,
                         'eb_3_transaction_type':self.eb_3_transaction_type,
                         'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
         self.eb_3_transaction_type = '000003'
+
         return {
             'context': self.env.context,
             'view_type': 'form',
@@ -154,11 +187,17 @@ class WindowWizard(models.TransientModel):
         self._check_alphanum()
         self._check_size()
         self._check_a()
+
+        #message = self.createMessage(1, 'F')
+        #self.connect()
+        #self.sendMessage(message, 1, 'F')
+
         pay = self.env['eb.transaction']
         pay.create({'eb_2_service_identifier':self.eb_2_service_identifier,
-                        'eb_3_transaction_type':self.eb_3_transaction_type,
-                        'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
-        self.eb_3_transaction_type = '000002'
+                    'eb_3_transaction_type':self.eb_3_transaction_type,
+                    'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
+        self.eb_3_transaction_type = '000001'
+
         return {
             'context': self.env.context,
             'view_type': 'form',
@@ -169,3 +208,119 @@ class WindowWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
             'target': 'new',
         }
+
+    def createMessage(self, transactionType, platformType=None):
+        # get new object
+        p = ISO8583CNT()
+        # some string describing the transation type
+        transation = "200"
+        p.setTransationType(transation)
+        # Is the same that:
+        # p.setMTI(transation)
+        bank = self.env['eb.setting']
+        if transactionType == 3:
+            p.setBit(2, self.eb_2_service_identifier)
+            p.setBit(3, self.eb_3_transaction_type)
+            p.setBit(12, self.eb_12_local_transaction_time)
+            p.setBit(13, self.eb_13_local_transaction_date)
+            p.setBit(19, self.eb_19_consult_criterion)
+            p.setBit(23, self.eb_23_service_type)
+            p.setBit(32, self.eb_32_setting_id)
+            p.setBit(33, "")
+            p.setBit(34, "98765432")
+            p.setBit(37, "303500098765432")
+            p.setBit(41, 986)
+
+        elif transactionType == 2:
+            p.setBit(2, self.eb_2_service_identifier)
+            p.setBit(3, self.eb_3_transaction_type)
+            p.setBit(4, self.eb_3_transaction_type)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(11, self.eb_12_local_transaction_time)
+            p.setBit(12, self.eb_13_local_transaction_date)
+            p.setBit(13, self.eb_19_consult_criterion)
+            p.setBit(23, self.eb_23_service_type)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(28, self.eb_32_setting_id)
+            p.setBit(32, "")
+            p.setBit(33, "98765432")
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(34, "303500098765432")
+                p.setBit(37, 986)
+            p.setBit(41, 986)
+            p.setBit(42, 986)
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(43, 986)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(45, 986)
+                p.setBit(48, 986)
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(49, 986)
+        elif transactionType == 1:
+            p.setBit(2, self.eb_2_service_identifier)
+            p.setBit(3, self.eb_3_transaction_type)
+            p.setBit(4, self.eb_12_local_transaction_time)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(11, self.eb_13_local_transaction_date)
+            p.setBit(12, self.eb_19_consult_criterion)
+            p.setBit(13, self.eb_23_service_type)
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(15, self.eb_23_service_type)
+            p.setBit(23, self.eb_23_service_type)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(28, self.eb_23_service_type)
+            p.setBit(32, self.eb_32_setting_id)
+            p.setBit(33, "")
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(34, "98765432")
+            p.setBit(37, "303500098765432")
+            p.setBit(41, 986)
+            if platformType == 'V' or platformType == 'C':
+                p.setBit(45, 986)
+                p.setBit(48, 986)
+            if platformType == 'F' or platformType == 'M':
+                p.setBit(49, 986)
+        else:
+            p.setBit(7, self.eb_2_service_identifier)
+            p.setBit(11, self.eb_3_transaction_type)
+            p.setBit(18, self.eb_12_local_transaction_time)
+            p.setBit(70, 986)
+        return  p.getRawIso()
+
+    def connect(self):
+        for res in socket.getaddrinfo(self.serverIP, self.serverPort, socket.AF_UNSPEC, socket.SOCK_STREAM):
+            af, socktype, proto, canonname, sa = res
+            try:
+                self.s = socket.socket(af, socktype, proto)
+            except socket.error, msg:
+                self.s = None
+                continue
+            try:
+                self.s.connect(sa)
+            except socket.error, msg:
+                self.s.close()
+                self.s = None
+                continue
+            break
+        if self.s is None:
+            print ('Could not connect :(')
+
+    def sendMessage(self, message, transactionType, platformType):
+        try:
+            self.s.send(message)
+            ans = self.s.recv(2048)
+            isoAns = ISO8583CNT()
+            isoAns.setIsoContent(ans)
+            isoAns.getRawIso()
+            if transactionType == 3:
+                isoAns.getBit(4)
+                isoAns.getBit(18)
+            elif transactionType == 2:
+                isoAns.getBit(18)
+            elif transactionType == 1:
+                isoAns.getBit(18)
+                isoAns.getBit(42)
+            else:
+                isoAns.getBit(18)
+        except InvalidIso8583, ii:
+            print ii
