@@ -344,7 +344,7 @@ class WindowWizard(models.TransientModel):
     def consult(self):
         self._check_num()
 
-        #message = self.createMessage(3, 'F')
+        message = self.createMessage(3, 'F')
         #self.connect()
         #self.sendMessage(message, 3, 'F')
 
@@ -442,10 +442,10 @@ class WindowWizard(models.TransientModel):
             p.setBit(19, self.eb_19_consult_criterion)
             p.setBit(23, self.eb_23_service_type)
             p.setBit(32, self.eb_32_setting_id)
-            p.setBit(33, "")
-            p.setBit(34, "98765432")
-            p.setBit(37, "303500098765432")
-            p.setBit(41, 986)
+            p.setBit(33, bank.eb_33_agency_code)
+            p.setBit(34, bank.eb_34_cashier)
+            p.setBit(37, bank.eb_37_acquirer_sequence)
+            p.setBit(41, bank.eb_41_terminal)
 
         elif transactionType == 2:
             p.setBit(2, self.eb_2_service_identifier)
@@ -458,17 +458,17 @@ class WindowWizard(models.TransientModel):
             p.setBit(23, self.eb_23_service_type)
             if platformType == 'V' or platformType == 'C':
                 p.setBit(28, self.eb_32_setting_id)
-            p.setBit(32, "")
-            p.setBit(33, "98765432")
+            p.setBit(32, self.eb_32_setting_id)
+            p.setBit(33, bank.eb_33_agency_code)
             if platformType == 'F' or platformType == 'M':
-                p.setBit(34, "303500098765432")
-                p.setBit(37, 986)
+                p.setBit(34, bank.eb_34_cashier)
+                p.setBit(37, bank.eb_37_acquirer_sequence)
             p.setBit(41, 986)
             p.setBit(42, 986)
             if platformType == 'F' or platformType == 'M':
                 p.setBit(43, 986)
             if platformType == 'V' or platformType == 'C':
-                p.setBit(45, 986)
+                p.setBit(45, self.eb_45_name_lastname)
                 p.setBit(48, 986)
             if platformType == 'F' or platformType == 'M':
                 p.setBit(49, 986)
@@ -486,13 +486,13 @@ class WindowWizard(models.TransientModel):
             if platformType == 'V' or platformType == 'C':
                 p.setBit(28, self.eb_23_service_type)
             p.setBit(32, self.eb_32_setting_id)
-            p.setBit(33, "")
+            p.setBit(33, bank.eb_33_agency_code)
             if platformType == 'F' or platformType == 'M':
-                p.setBit(34, "98765432")
-            p.setBit(37, "303500098765432")
+                p.setBit(34, bank.eb_34_cashier)
+            p.setBit(37, bank.eb_37_acquirer_sequence)
             p.setBit(41, 986)
             if platformType == 'V' or platformType == 'C':
-                p.setBit(45, 986)
+                p.setBit(45, self.eb_45_name_lastname)
                 p.setBit(48, 986)
             if platformType == 'F' or platformType == 'M':
                 p.setBit(49, 986)
