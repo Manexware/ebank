@@ -54,6 +54,7 @@ class WindowWizard(models.TransientModel):
     flag_eb_42 = fields.Boolean(compute='_set_flag', default=False)
     flag_eb_43 = fields.Boolean(compute='_set_flag', default=False)
     flag_eb_45 = fields.Boolean(compute='_set_flag', default=False)
+    flag_eb_48 = fields.Boolean(compute='_set_flag', default=False)
     flag_eb_49 = fields.Boolean(compute='_set_flag', default=False)
     flag_eb_70 = fields.Boolean(compute='_set_flag', default=False)
 
@@ -154,7 +155,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = True
             self.flag_eb_23 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000003' and self.platform == '02':
             self.flag_eb_2 = True
             self.flag_eb_4 = False
@@ -164,7 +171,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = True
             self.flag_eb_23 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000003' and self.platform == '03':
             self.flag_eb_2 = False
             self.flag_eb_4 = False
@@ -174,7 +187,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = False
+            self.flag_eb_28 = False
             self.flag_eb_32 = False
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000003' and self.platform == '04':
             self.flag_eb_2 = False
             self.flag_eb_4 = False
@@ -184,7 +203,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = False
+            self.flag_eb_28 = False
             self.flag_eb_32 = False
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000001' and self.platform == '01':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -194,7 +219,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = True
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000001' and self.platform == '02':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -204,7 +235,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = True
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000001' and self.platform == '03':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -214,7 +251,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000001' and self.platform == '04':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -224,7 +267,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '01':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -234,7 +283,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '02':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -244,7 +299,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '03':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -254,7 +315,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '04':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -264,7 +331,13 @@ class WindowWizard(models.TransientModel):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
+            self.flag_eb_28 = True
             self.flag_eb_32 = True
+            self.flag_eb_42 = True
+            self.flag_eb_43 = True
+            self.flag_eb_45 = True
+            self.flag_eb_48 = True
+            self.flag_eb_49 = True
 
 
     @api.multi
