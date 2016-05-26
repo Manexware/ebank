@@ -53,7 +53,7 @@ class EbTransaction(models.Model):
     _sql_constraints = [
         ('name_uk', 'unique(name)', 'Transaction must be unique'),
     ]
-    @api.one
+    api.one
     @api.depends('eb_3_transaction_type','platform')
     def _set_flag(self):
         if self.eb_3_transaction_type == '000003' and self.platform == '01':
@@ -129,12 +129,12 @@ class EbTransaction(models.Model):
             self.flag_eb_15 = True
             self.flag_eb_19 = False
             self.flag_eb_23 = True
-            self.flag_eb_28 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
-            self.flag_eb_42 = True
-            self.flag_eb_43 = True
-            self.flag_eb_45 = True
-            self.flag_eb_48 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
             self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000001' and self.platform == '02':
             self.flag_eb_2 = True
@@ -145,12 +145,12 @@ class EbTransaction(models.Model):
             self.flag_eb_15 = True
             self.flag_eb_19 = False
             self.flag_eb_23 = True
-            self.flag_eb_28 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
-            self.flag_eb_42 = True
-            self.flag_eb_43 = True
-            self.flag_eb_45 = True
-            self.flag_eb_48 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
             self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000001' and self.platform == '03':
             self.flag_eb_2 = True
@@ -163,11 +163,11 @@ class EbTransaction(models.Model):
             self.flag_eb_23 = True
             self.flag_eb_28 = True
             self.flag_eb_32 = True
-            self.flag_eb_42 = True
-            self.flag_eb_43 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
             self.flag_eb_45 = True
             self.flag_eb_48 = True
-            self.flag_eb_49 = True
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000001' and self.platform == '04':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -179,11 +179,11 @@ class EbTransaction(models.Model):
             self.flag_eb_23 = True
             self.flag_eb_28 = True
             self.flag_eb_32 = True
-            self.flag_eb_42 = True
-            self.flag_eb_43 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
             self.flag_eb_45 = True
             self.flag_eb_48 = True
-            self.flag_eb_49 = True
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000002' and self.platform == '01':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -193,12 +193,12 @@ class EbTransaction(models.Model):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
-            self.flag_eb_28 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
             self.flag_eb_42 = True
             self.flag_eb_43 = True
-            self.flag_eb_45 = True
-            self.flag_eb_48 = True
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
             self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '02':
             self.flag_eb_2 = True
@@ -209,12 +209,12 @@ class EbTransaction(models.Model):
             self.flag_eb_15 = False
             self.flag_eb_19 = False
             self.flag_eb_23 = True
-            self.flag_eb_28 = True
+            self.flag_eb_28 = False
             self.flag_eb_32 = True
             self.flag_eb_42 = True
             self.flag_eb_43 = True
-            self.flag_eb_45 = True
-            self.flag_eb_48 = True
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
             self.flag_eb_49 = True
         if self.eb_3_transaction_type == '000002' and self.platform == '03':
             self.flag_eb_2 = True
@@ -228,10 +228,10 @@ class EbTransaction(models.Model):
             self.flag_eb_28 = True
             self.flag_eb_32 = True
             self.flag_eb_42 = True
-            self.flag_eb_43 = True
+            self.flag_eb_43 = False
             self.flag_eb_45 = True
             self.flag_eb_48 = True
-            self.flag_eb_49 = True
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000002' and self.platform == '04':
             self.flag_eb_2 = True
             self.flag_eb_4 = True
@@ -244,10 +244,10 @@ class EbTransaction(models.Model):
             self.flag_eb_28 = True
             self.flag_eb_32 = True
             self.flag_eb_42 = True
-            self.flag_eb_43 = True
+            self.flag_eb_43 = False
             self.flag_eb_45 = True
             self.flag_eb_48 = True
-            self.flag_eb_49 = True
+            self.flag_eb_49 = False
 
     @api.one
     def copy(self, default=None):
