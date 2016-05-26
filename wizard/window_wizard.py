@@ -63,8 +63,8 @@ class WindowWizard(models.TransientModel):
     response = fields.Char()
 
     # Configure the client
-    serverIP = "192.168.0.103"
-    serverPort = 8583
+    serverIP = "130.10.50.15"
+    serverPort = 2610
     numberEcho = 5
     timeBetweenEcho = 5  # in seconds
 
@@ -345,8 +345,8 @@ class WindowWizard(models.TransientModel):
         self._check_num()
 
         message = self.createMessage(3, 'F')
-        #self.connect()
-        #self.sendMessage(message, 3, 'F')
+        self.connect()
+        self.sendMessage(message, 3, 'F')
 
         consult = self.env['eb.transaction']
         consult.create({'eb_2_service_identifier':self.eb_2_service_identifier,
@@ -433,7 +433,7 @@ class WindowWizard(models.TransientModel):
         p.setTransationType(transation)
         # Is the same that:
         # p.setMTI(transation)
-        bank = self.env['eb.setting']
+
         if transactionType == 3:
             p.setBit(2, self.eb_2_service_identifier)
             p.setBit(3, self.eb_3_transaction_type)
@@ -441,11 +441,11 @@ class WindowWizard(models.TransientModel):
             p.setBit(13, self.eb_13_local_transaction_date)
             p.setBit(19, self.eb_19_consult_criterion)
             p.setBit(23, self.eb_23_service_type)
-            p.setBit(32, self.eb_32_setting_id)
-            p.setBit(33, bank.eb_33_agency_code)
-            p.setBit(34, bank.eb_34_cashier)
-            p.setBit(37, bank.eb_37_acquirer_sequence)
-            p.setBit(41, bank.eb_41_terminal)
+            p.setBit(32, self.eb_32_setting_id.eb_32_acquirer_institution)
+            p.setBit(33, self.eb_32_setting_id.eb_33_agency_code)
+            p.setBit(34, self.eb_32_setting_id.eb_34_cashier)
+            p.setBit(37, self.eb_32_setting_id.eb_37_acquirer_sequence)
+            p.setBit(41, self.eb_32_setting_id.eb_41_terminal)
 
         elif transactionType == 2:
             p.setBit(2, self.eb_2_service_identifier)
@@ -459,10 +459,10 @@ class WindowWizard(models.TransientModel):
             if platformType == 'V' or platformType == 'C':
                 p.setBit(28, self.eb_32_setting_id)
             p.setBit(32, self.eb_32_setting_id)
-            p.setBit(33, bank.eb_33_agency_code)
+            p.setBit(33, self.eb_32_setting_id.eb_33_agency_code)
             if platformType == 'F' or platformType == 'M':
-                p.setBit(34, bank.eb_34_cashier)
-                p.setBit(37, bank.eb_37_acquirer_sequence)
+                p.setBit(34, self.eb_32_setting_id.eb_34_cashier)
+                p.setBit(37, self.eb_32_setting_id.eb_37_acquirer_sequence)
             p.setBit(41, 986)
             p.setBit(42, 986)
             if platformType == 'F' or platformType == 'M':
@@ -486,10 +486,10 @@ class WindowWizard(models.TransientModel):
             if platformType == 'V' or platformType == 'C':
                 p.setBit(28, self.eb_23_service_type)
             p.setBit(32, self.eb_32_setting_id)
-            p.setBit(33, bank.eb_33_agency_code)
+            p.setBit(33, self.eb_32_setting_id.eb_33_agency_code)
             if platformType == 'F' or platformType == 'M':
-                p.setBit(34, bank.eb_34_cashier)
-            p.setBit(37, bank.eb_37_acquirer_sequence)
+                p.setBit(34, self.eb_32_setting_id.eb_34_cashier)
+            p.setBit(37, self.eb_32_setting_id.eb_37_acquirer_sequence)
             p.setBit(41, 986)
             if platformType == 'V' or platformType == 'C':
                 p.setBit(45, self.eb_45_name_lastname)
