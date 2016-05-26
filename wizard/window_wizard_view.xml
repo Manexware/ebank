@@ -40,6 +40,7 @@
                                     'required':[('flag_eb_48','=',True)]}"/>
                         <field name="eb_49_currency_type" attrs="{'invisible':[('flag_eb_49','=',False)],
                                     'required':[('flag_eb_49','=',True)]}"/>
+                        <field name ="response" readonly="1" />
                         <field name="flag_eb_2" invisible="1" />
                         <field name="flag_eb_4" invisible="1" />
                         <field name="flag_eb_11" invisible="1"/>

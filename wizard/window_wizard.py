@@ -19,7 +19,7 @@ class WindowWizard(models.TransientModel):
     _description = 'Window wizard'
 
     name = fields.Char()
-    eb_2_service_identifier = fields.Char(size=19, required=True)
+    eb_2_service_identifier = fields.Char(size=19, required=True, default='042214284')
     eb_3_transaction_type = fields.Selection(misc.TRANSACTION_TYPE, default='000003', required=True)
     eb_4_total_value = fields.Float(digits=(18, 2))
     eb_7_date_time = fields.Char()
