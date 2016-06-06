@@ -1,0 +1,577 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ebank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-04 05:29+0000\n"
+"PO-Revision-Date: 2016-06-04 00:44-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: ebank
+#: selection:eb.transaction,eb_3_transaction_type:0
+#: selection:eb.window.wizard,eb_3_transaction_type:0
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "Back"
+msgstr "Reverso"
+
+#. module: ebank
+#: selection:eb.transaction,platform:0 selection:eb.window.wizard,platform:0
+msgid "CDMA 450"
+msgstr "CDMA 450"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "CDMA 450 FIXED RECHARGE"
+msgstr "RECARGA FIJA CDMA 450"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "CNT RECHARGE MOBILE"
+msgstr "RECARGA MOVIL CNT"
+
+#. module: ebank
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: ebank
+#: model:ir.actions.act_window,help:ebank.act_open_eb_setting_view
+msgid "Click to create a new setting."
+msgstr "Hacer click para crear una nueva configuración"
+
+#. module: ebank
+#: model:ir.actions.act_window,help:ebank.act_open_eb_transaction_view
+msgid "Click to create a new transaction."
+msgstr "Hacer click para crear una nueva transacción"
+
+#. module: ebank
+#: selection:eb.transaction,eb_3_transaction_type:0
+#: selection:eb.window.wizard,eb_3_transaction_type:0
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "Consult"
+msgstr "Consulta"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_create_uid
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_create_uid
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_create_date
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_create_date
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_display_name
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_display_name
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_11_location_code
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_11_location_code
+msgid "Eb 11 location code"
+msgstr "Código de localidad"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_11_sequential
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_11_sequential
+msgid "Eb 11 sequential"
+msgstr "Secuencial"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_12_local_transaction_time
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_12_local_transaction_time
+msgid "Eb 12 local transaction time"
+msgstr "Hora transacción local"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_13_local_transaction_date
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_13_local_transaction_date
+msgid "Eb 13 local transaction date"
+msgstr "Fecha transacción local"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_15_compensation_date
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_15_compensation_date
+msgid "Eb 15 compensation date"
+msgstr "Fecha Compensación"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_19_consult_criterion
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_19_consult_criterion
+msgid "Eb 19 consult criterion"
+msgstr "Criterio de Consulta"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_2_service_identifier
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_2_service_identifier
+msgid "Eb 2 service identifier"
+msgstr "Identificador de Servicio"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_23_service_type
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_23_service_type
+msgid "Eb 23 service type"
+msgstr "Tipo de Servicio"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_28_doc
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_28_doc
+msgid "Eb 28 doc"
+msgstr "Documento"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_3_transaction_type
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_3_transaction_type
+msgid "Eb 3 transaction type"
+msgstr "Tipo de transacción"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_eb_32_acquirer_institution
+msgid "Eb 32 acquirer institution"
+msgstr "Institución adquiriente"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_32_setting_id
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_32_setting_id
+msgid "Eb 32 setting id"
+msgstr "Configuración"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_eb_33_agency_code
+msgid "Eb 33 agency code"
+msgstr "Código de Agencia"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_eb_34_cashier
+msgid "Eb 34 cashier"
+msgstr "Cajero"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_eb_37_acquirer_sequence
+msgid "Eb 37 acquirer sequence"
+msgstr "Secuencial del adquiriente"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_4_total_value
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_4_total_value
+msgid "Eb 4 total value"
+msgstr "Valor total"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_eb_41_terminal
+msgid "Eb 41 terminal"
+msgstr "Terminal"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_42_pay_id
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_42_pay_id
+msgid "Eb 42 pay id"
+msgstr "Id Pago"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_43_back_reason
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_43_back_reason
+msgid "Eb 43 back reason"
+msgstr "Reversa/ Reason"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_45_name_lastname
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_45_name_lastname
+msgid "Eb 45 name lastname"
+msgstr "Nombre y apellido"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_48_address
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_48_address
+msgid "Eb 48 address"
+msgstr "Dirección"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_49_currency_type
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_49_currency_type
+msgid "Eb 49 currency type"
+msgstr "Tipo moneda"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_7_date_time
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_7_date_time
+msgid "Eb 7 date time"
+msgstr "Fecha Hora"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_eb_70_administrative_transaction_code
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_eb_70_administrative_transaction_code
+msgid "Eb 70 administrative transaction code"
+msgstr "Código Transacción Administrativa"
+
+#. module: ebank
+#: model:ir.ui.menu,name:ebank.eb_main_menu
+msgid "Ebank"
+msgstr "Ebank"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "FIXED"
+msgstr "FIJA"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "FIXED INTERNET"
+msgstr "INTERNET FIJO"
+
+#. module: ebank
+#: selection:eb.transaction,platform:0 selection:eb.window.wizard,platform:0
+msgid "Fixed"
+msgstr "Fijo"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_11
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_11
+msgid "Flag eb 11"
+msgstr "Flag eb 11"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_12
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_12
+msgid "Flag eb 12"
+msgstr "Flag eb 12"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_13
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_13
+msgid "Flag eb 13"
+msgstr "Flag eb 13"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_15
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_15
+msgid "Flag eb 15"
+msgstr "Flag eb 15"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_19
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_19
+msgid "Flag eb 19"
+msgstr "Flag eb 19"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_2
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_2
+msgid "Flag eb 2"
+msgstr "Flag eb 2"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_23
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_23
+msgid "Flag eb 23"
+msgstr "Flag eb 23"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_28
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_28
+msgid "Flag eb 28"
+msgstr "Flag eb 28"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_32
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_32
+msgid "Flag eb 32"
+msgstr "Flag eb 32"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_4
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_4
+msgid "Flag eb 4"
+msgstr "Flag eb 4"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_42
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_42
+msgid "Flag eb 42"
+msgstr "Flag eb 42"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_43
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_43
+msgid "Flag eb 43"
+msgstr "Flag eb 43"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_45
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_45
+msgid "Flag eb 45"
+msgstr "Flag eb 45"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_48
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_48
+msgid "Flag eb 48"
+msgstr "Flag eb 48"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_49
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_49
+msgid "Flag eb 49"
+msgstr "Flag eb 49"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_7
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_7
+msgid "Flag eb 7"
+msgstr "Flag eb 7"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_flag_eb_70
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_flag_eb_70
+msgid "Flag eb 70"
+msgstr "Flag eb 70"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_id
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_id
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting___last_update
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction___last_update
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_write_uid
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_write_uid
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_write_date
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_write_date
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "MOBILE"
+msgstr "MOVIL"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_mit
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_mit
+msgid "Mit"
+msgstr "Mit"
+
+#. module: ebank
+#: selection:eb.transaction,platform:0 selection:eb.window.wizard,platform:0
+msgid "Mobile"
+msgstr "Movil"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_setting_name
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_name
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_name
+#: model:ir.ui.view,arch_db:ebank.view_eb_setting_form
+msgid "Name"
+msgstr "Nombre"
+
+#. module: ebank
+#: selection:eb.transaction,eb_3_transaction_type:0
+#: selection:eb.window.wizard,eb_3_transaction_type:0
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "Pay"
+msgstr "Pago"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_platform
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_platform
+msgid "Platform"
+msgstr "Plataforma"
+
+#. module: ebank
+#: model:ir.model,name:ebank.model_eb_window_wizard
+msgid "RWindow wizard"
+msgstr "Venta"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_response
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_response
+msgid "Response"
+msgstr "Respuesta"
+
+#. module: ebank
+#: model:ir.actions.act_window,name:ebank.act_open_eb_setting_view
+#: model:ir.model,name:ebank.model_eb_setting
+#: model:ir.ui.view,arch_db:ebank.view_eb_setting_form
+#: model:ir.ui.view,arch_db:ebank.view_eb_setting_tree
+msgid "Setting"
+msgstr "Configuración"
+
+#. module: ebank
+#: sql_constraint:eb.setting:0
+msgid "Setting must be unique"
+msgstr "Configuración debe ser unica"
+
+#. module: ebank
+#: model:ir.ui.view,arch_db:ebank.view_eb_setting_search
+msgid "Setting of Personal Appreciation"
+msgstr "Setting of Personal Appreciation"
+
+#. module: ebank
+#: model:ir.ui.menu,name:ebank.eb_settings
+msgid "Settings"
+msgstr "Configuración"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_state
+msgid "State"
+msgstr "Estado"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "TOTAL PAY"
+msgstr "PAGO TOAL"
+
+#. module: ebank
+#: selection:eb.transaction,eb_23_service_type:0
+#: selection:eb.window.wizard,eb_23_service_type:0
+msgid "TV"
+msgstr "TV"
+
+#. module: ebank
+#: model:ir.model.fields,field_description:ebank.field_eb_transaction_telephony
+#: model:ir.model.fields,field_description:ebank.field_eb_window_wizard_telephony
+msgid "Telephony"
+msgstr "Telefonia"
+
+#. module: ebank
+#: model:ir.actions.act_window,name:ebank.act_open_eb_transaction_view
+#: model:ir.model,name:ebank.model_eb_transaction
+#: model:ir.ui.menu,name:ebank.eb_transaction
+#: model:ir.ui.view,arch_db:ebank.view_eb_transaction_form
+#: model:ir.ui.view,arch_db:ebank.view_eb_transaction_search
+#: model:ir.ui.view,arch_db:ebank.view_eb_transaction_tree
+msgid "Transaction"
+msgstr "Transacción"
+
+#. module: ebank
+#: sql_constraint:eb.transaction:0
+msgid "Transaction must be unique"
+msgstr "Transacción debe ser unica"
+
+#. module: ebank
+#: selection:eb.transaction,platform:0 selection:eb.window.wizard,platform:0
+msgid "VTA"
+msgstr "VTA"
+
+#. module: ebank
+#: model:ir.actions.act_window,name:ebank.window_wizard_action
+#: model:ir.ui.menu,name:ebank.eb_window
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "Window"
+msgstr "Ventana"
+
+#. module: ebank
+#: selection:eb.transaction,eb_43_back_reason:0
+#: selection:eb.window.wizard,eb_43_back_reason:0
+msgid "annulment"
+msgstr "anulada"
+
+#. module: ebank
+#: selection:eb.transaction,eb_19_consult_criterion:0
+#: selection:eb.window.wizard,eb_19_consult_criterion:0
+msgid "by financial account"
+msgstr "Por cuenta financiera"
+
+#. module: ebank
+#: selection:eb.transaction,eb_19_consult_criterion:0
+#: selection:eb.window.wizard,eb_19_consult_criterion:0
+msgid "by telephone number"
+msgstr "Por número telefónico"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "c-f"
+msgstr "c-f"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "c-m"
+msgstr "c-m"
+
+#. module: ebank
+#: model:ir.ui.view,arch_db:ebank.window_wizard_form
+msgid "or"
+msgstr "or"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "p_c"
+msgstr "p_c"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "p_f"
+msgstr "p_f"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "p_m"
+msgstr "p_m"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "p_v"
+msgstr "p_v"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "r_c"
+msgstr "r_c"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "r_f"
+msgstr "r_f"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "r_m"
+msgstr "r_m"
+
+#. module: ebank
+#: selection:eb.window.wizard,state:0
+msgid "r_v"
+msgstr "r_v"
+
+#. module: ebank
+#: selection:eb.transaction,eb_43_back_reason:0
+#: selection:eb.window.wizard,eb_43_back_reason:0
+msgid "timeout"
+msgstr "timeout"
