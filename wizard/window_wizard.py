@@ -352,7 +352,7 @@ class WindowWizard(models.TransientModel):
         consult.create({'eb_2_service_identifier':self.eb_2_service_identifier,
                         'eb_3_transaction_type':self.eb_3_transaction_type,
                         'eb_12_local_transaction_time':self.eb_12_local_transaction_time})
-        self.eb_3_transaction_type = '000002'
+        self.eb_3_transaction_type = '000001'
 
         # ubicar este codigo en el close del wizard
         #if self.s is not None:
@@ -523,20 +523,29 @@ class WindowWizard(models.TransientModel):
 
     def sendMessage(self, message, transactionType, platformType):
         try:
-            self.s.send(message)
+            data = message + '\n'
+            self.s.send(data)
             ans = self.s.recv(2048)
-            isoAns = ISO8583CNT()
-            isoAns.setIsoContent(ans)
-            isoAns.getRawIso()
-            if transactionType == 3:
-                isoAns.getBit(4)
-                isoAns.getBit(18)
-            elif transactionType == 2:
-                isoAns.getBit(18)
-            elif transactionType == 1:
-                isoAns.getBit(18)
-                isoAns.getBit(42)
+            if ans:
+                if ans != data:
+                    isoAns = ISO8583CNT()
+                    isoAns.setIsoContent(ans)
+
+                    self.response = isoAns.getRawIso()
+                    if transactionType == 3:
+                        isoAns.getBit(4)
+                        isoAns.getBit(18)
+                    elif transactionType == 2:
+                        isoAns.getBit(18)
+                    elif transactionType == 1:
+                        isoAns.getBit(18)
+                        isoAns.getBit(42)
+                    else:
+                        isoAns.getBit(18)
+                else:
+                    self.response = ans
             else:
-                isoAns.getBit(18)
+                self.response = "ERROR"
+
         except InvalidIso8583, ii:
             print ii
