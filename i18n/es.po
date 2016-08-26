@@ -456,7 +456,7 @@ msgstr "Estado"
 #: selection:eb.transaction,eb_23_service_type:0
 #: selection:eb.window.wizard,eb_23_service_type:0
 msgid "TOTAL PAY"
-msgstr "PAGO TOAL"
+msgstr "PAGO TOTAL"
 
 #. module: ebank
 #: selection:eb.transaction,eb_23_service_type:0

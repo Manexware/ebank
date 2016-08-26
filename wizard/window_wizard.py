@@ -63,8 +63,9 @@ class WindowWizard(models.TransientModel):
     response = fields.Char()
 
     # Configure the client
-    serverIP = "130.10.50.15"
-    serverPort = 2610
+    #serverIP = "130.10.50.15"
+    serverIP = "172.17.222.136"
+    serverPort = 8899
     numberEcho = 5
     timeBetweenEcho = 5  # in seconds
 
@@ -146,6 +147,38 @@ class WindowWizard(models.TransientModel):
     @api.one
     @api.depends('eb_3_transaction_type','platform')
     def _set_flag(self):
+        if self.eb_3_transaction_type == '000004' and self.platform == '01':
+            self.flag_eb_2 = False
+            self.flag_eb_4 = False
+            self.flag_eb_11 = False
+            self.flag_eb_12 = False
+            self.flag_eb_13 = False
+            self.flag_eb_15 = False
+            self.flag_eb_19 = False
+            self.flag_eb_23 = False
+            self.flag_eb_28 = False
+            self.flag_eb_32 = True
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
+        if self.eb_3_transaction_type == '000005' and self.platform == '01':
+            self.flag_eb_2 = False
+            self.flag_eb_4 = False
+            self.flag_eb_11 = False
+            self.flag_eb_12 = False
+            self.flag_eb_13 = False
+            self.flag_eb_15 = False
+            self.flag_eb_19 = False
+            self.flag_eb_23 = False
+            self.flag_eb_28 = False
+            self.flag_eb_32 = False
+            self.flag_eb_42 = False
+            self.flag_eb_43 = False
+            self.flag_eb_45 = False
+            self.flag_eb_48 = False
+            self.flag_eb_49 = False
         if self.eb_3_transaction_type == '000003' and self.platform == '01':
             self.flag_eb_2 = True
             self.flag_eb_4 = False
@@ -370,6 +403,34 @@ class WindowWizard(models.TransientModel):
         }
 
     @api.multi
+    def login(self):
+
+        message = self.createMessageLogin(4)
+        self.connect()
+        self.sendMessage(message, 4, 'F')
+
+        consult = self.env['eb.transaction']
+        consult.create({'eb_2_service_identifier': self.eb_2_service_identifier,
+                        'eb_3_transaction_type': self.eb_3_transaction_type,
+                        'eb_12_local_transaction_time': self.eb_12_local_transaction_time})
+        self.eb_3_transaction_type = '000003'
+
+        # ubicar este codigo en el close del wizard
+        # if self.s is not None:
+        # self.s.close()
+
+        return {
+            'context': self.env.context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'eb.window.wizard',
+            'res_id': self.id,
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
+    @api.multi
     def back(self):
         self._check_num()
         self._check_alphanum()
@@ -424,6 +485,26 @@ class WindowWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
             'target': 'new',
         }
+
+    def createMessageLogin(self, transactionType):
+        # get new object
+        p = ISO8583CNT()
+
+        if transactionType == 4:
+            transation = "801"
+            p.setTransationType(transation)
+            p.setBit(3, self.eb_3_transaction_type)
+            p.setBit(7, self.eb_12_local_transaction_time)
+            p.setBit(69, "CAJSUCNT|CAJs3102")
+            p.setBit(70, "004")
+        elif transactionType == 5:
+            transation = "802"
+            p.setTransationType(transation)
+            p.setBit(3, self.eb_3_transaction_type)
+            p.setBit(7, self.eb_12_local_transaction_time)
+            p.setBit(69, "CAJSUCNT|CAJs3102")
+            p.setBit(70, "005")
+        return  p.getRawIso()
 
     def createMessage(self, transactionType, platformType=None):
         # get new object
