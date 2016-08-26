@@ -437,9 +437,9 @@ class WindowWizard(models.TransientModel):
         self._check_size()
         self._check_a()
 
-        #message = self.createMessage(2, 'F')
-        #self.connect()
-        #self.sendMessage(message, 2, 'F')
+        message = self.createMessage(2, 'F')
+        self.connect()
+        self.sendMessage(message, 2, 'F')
 
         back = self.env['eb.transaction']
         back.create({'eb_2_service_identifier':self.eb_2_service_identifier,
@@ -465,9 +465,9 @@ class WindowWizard(models.TransientModel):
         self._check_size()
         self._check_a()
 
-        #message = self.createMessage(1, 'F')
-        #self.connect()
-        #self.sendMessage(message, 1, 'F')
+        message = self.createMessage(1, 'F')
+        self.connect()
+        self.sendMessage(message, 1, 'F')
 
         pay = self.env['eb.transaction']
         pay.create({'eb_2_service_identifier':self.eb_2_service_identifier,
