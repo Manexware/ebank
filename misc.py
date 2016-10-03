@@ -2,8 +2,6 @@ TRANSACTION_TYPE = [
     ('000001', 'Pay'),
     ('000002', 'Back'),
     ('000003', 'Consult'),
-    ('000004', 'Login'),
-    ('000005', 'Logout'),
 ]
 
 CONSULT_CRITERION = [

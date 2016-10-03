@@ -61,8 +61,6 @@
                         <button name="consult" string="Consult" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000003')]}"/>
                         <button name="back" string="Back" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000002')]}"/>
                         <button name="pay" string="Pay" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000001')]}"/>
-                        <button name="login" string="Login" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000004')]}"/>
-                        <button name="logout" string="Logout" type="object" class="oe_highlight" attrs="{'invisible': [('eb_3_transaction_type', '!=', '000005')]}"/>
                         or<button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
                 </form>
