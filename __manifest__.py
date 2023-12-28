@@ -7,7 +7,7 @@
     'summary': 'Consulta trama ISO',
     'description': """
         CNT
-        Consulta trama ISO
+        Consulta trama ISO8583
         """,
     'css': [],
     'qweb': [],

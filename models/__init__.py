@@ -1,2 +1,2 @@
-import setting
-import transaction
+import ebank_setting
+import ebank_transaction

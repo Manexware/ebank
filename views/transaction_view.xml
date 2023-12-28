@@ -2,79 +2,79 @@
 <openerp>
     <data>
         <!-- Transaction of Personal Appreciation -->
-        <record id="view_eb_transaction_form" model="ir.ui.view">
-            <field name="name">eb.transaction.form</field>
-            <field name="model">eb.transaction</field>
+        <record id="view_ebank_transaction_form" model="ir.ui.view">
+            <field name="name">ebank.transaction.form</field>
+            <field name="model">ebank.transaction</field>
             <field name="arch" type="xml">
                 <form string="Transaction ">
                     <sheet>
                         <group>
-                            <field name="eb_3_transaction_type"/>
+                            <field name="ebank_3_transaction_type"/>
                         <field name="platform"/>
-                        <field name="eb_2_service_identifier" attrs="{'invisible':[('flag_eb_2','=',False)],
-                                    'required':[('flag_eb_2','=',True)]}"/>
-                        <field name="eb_4_total_value" attrs="{'invisible':[('flag_eb_4','=',False)],
-                                    'required':[('flag_eb_4','=',True)]}"/>
-                        <field name="eb_11_location_code" attrs="{'invisible':[('flag_eb_11','=',False)],
-                                    'required':[('flag_eb_11','=',True)]}"/>
-                        <field name="eb_12_local_transaction_time" attrs="{'invisible':[('flag_eb_12','=',False)],
-                                    'required':[('flag_eb_12','=',True)]}"/>
-                        <field name="eb_13_local_transaction_date" attrs="{'invisible':[('flag_eb_13','=',False)],
-                                    'required':[('flag_eb_13','=',True)]}"/>
-                        <field name="eb_15_compensation_date" attrs="{'invisible':[('flag_eb_15','=',False)],
-                                    'required':[('flag_eb_15','=',True)]}"/>
-                        <field name="eb_19_consult_criterion" attrs="{'invisible':[('flag_eb_19','=',False)],
-                                    'required':[('flag_eb_19','=',True)]}"/>
-                        <field name="eb_23_service_type" attrs="{'invisible':[('flag_eb_23','=',False)],
-                                    'required':[('flag_eb_23','=',True)]}"/>
-                        <field name="eb_28_doc" attrs="{'invisible':[('flag_eb_28','=',False)],
-                                    'required':[('flag_eb_28','=',True)]}"/>
-                        <field name="eb_32_setting_id" attrs="{'invisible':[('flag_eb_32','=',False)],
-                                    'required':[('flag_eb_32','=',True)]}"/>
-                        <field name="eb_42_pay_id" attrs="{'invisible':[('flag_eb_42','=',False)],
-                                    'required':[('flag_eb_42','=',True)]}"/>
-                        <field name="eb_43_back_reason" attrs="{'invisible':[('flag_eb_43','=',False)],
-                                    'required':[('flag_eb_43','=',True)]}"/>
-                        <field name="eb_45_name_lastname" attrs="{'invisible':[('flag_eb_45','=',False)],
-                                    'required':[('flag_eb_45','=',True)]}"/>
-                        <field name="eb_48_address" attrs="{'invisible':[('flag_eb_48','=',False)],
-                                    'required':[('flag_eb_48','=',True)]}"/>
-                        <field name="eb_49_currency_type" attrs="{'invisible':[('flag_eb_49','=',False)],
-                                    'required':[('flag_eb_49','=',True)]}"/>
-                        <field name="flag_eb_2" invisible="1" />
-                        <field name="flag_eb_4" invisible="1" />
-                        <field name="flag_eb_11" invisible="1"/>
-                        <field name="flag_eb_12" invisible="1"/>
-                        <field name="flag_eb_13" invisible="1"/>
-                        <field name="flag_eb_15" invisible="1"/>
-                        <field name="flag_eb_19" invisible="1"/>
-                        <field name="flag_eb_23" invisible="1"/>
-                        <field name="flag_eb_28" invisible="1"/>
-                        <field name="flag_eb_32" invisible="1"/>
-                        <field name="flag_eb_42" invisible="1"/>
-                        <field name="flag_eb_43" invisible="1"/>
-                        <field name="flag_eb_45" invisible="1"/>
-                        <field name="flag_eb_48" invisible="1"/>
-                        <field name="flag_eb_49" invisible="1"/>
+                        <field name="ebank_2_service_identifier" attrs="{'invisible':[('flag_ebank_2','=',False)],
+                                    'required':[('flag_ebank_2','=',True)]}"/>
+                        <field name="ebank_4_total_value" attrs="{'invisible':[('flag_ebank_4','=',False)],
+                                    'required':[('flag_ebank_4','=',True)]}"/>
+                        <field name="ebank_11_location_code" attrs="{'invisible':[('flag_ebank_11','=',False)],
+                                    'required':[('flag_ebank_11','=',True)]}"/>
+                        <field name="ebank_12_local_transaction_time" attrs="{'invisible':[('flag_ebank_12','=',False)],
+                                    'required':[('flag_ebank_12','=',True)]}"/>
+                        <field name="ebank_13_local_transaction_date" attrs="{'invisible':[('flag_ebank_13','=',False)],
+                                    'required':[('flag_ebank_13','=',True)]}"/>
+                        <field name="ebank_15_compensation_date" attrs="{'invisible':[('flag_ebank_15','=',False)],
+                                    'required':[('flag_ebank_15','=',True)]}"/>
+                        <field name="ebank_19_consult_criterion" attrs="{'invisible':[('flag_ebank_19','=',False)],
+                                    'required':[('flag_ebank_19','=',True)]}"/>
+                        <field name="ebank_23_service_type" attrs="{'invisible':[('flag_ebank_23','=',False)],
+                                    'required':[('flag_ebank_23','=',True)]}"/>
+                        <field name="ebank_28_doc" attrs="{'invisible':[('flag_ebank_28','=',False)],
+                                    'required':[('flag_ebank_28','=',True)]}"/>
+                        <field name="ebank_32_setting_id" attrs="{'invisible':[('flag_ebank_32','=',False)],
+                                    'required':[('flag_ebank_32','=',True)]}"/>
+                        <field name="ebank_42_pay_id" attrs="{'invisible':[('flag_ebank_42','=',False)],
+                                    'required':[('flag_ebank_42','=',True)]}"/>
+                        <field name="ebank_43_back_reason" attrs="{'invisible':[('flag_ebank_43','=',False)],
+                                    'required':[('flag_ebank_43','=',True)]}"/>
+                        <field name="ebank_45_name_lastname" attrs="{'invisible':[('flag_ebank_45','=',False)],
+                                    'required':[('flag_ebank_45','=',True)]}"/>
+                        <field name="ebank_48_address" attrs="{'invisible':[('flag_ebank_48','=',False)],
+                                    'required':[('flag_ebank_48','=',True)]}"/>
+                        <field name="ebank_49_currency_type" attrs="{'invisible':[('flag_ebank_49','=',False)],
+                                    'required':[('flag_ebank_49','=',True)]}"/>
+                        <field name="flag_ebank_2" invisible="1" />
+                        <field name="flag_ebank_4" invisible="1" />
+                        <field name="flag_ebank_11" invisible="1"/>
+                        <field name="flag_ebank_12" invisible="1"/>
+                        <field name="flag_ebank_13" invisible="1"/>
+                        <field name="flag_ebank_15" invisible="1"/>
+                        <field name="flag_ebank_19" invisible="1"/>
+                        <field name="flag_ebank_23" invisible="1"/>
+                        <field name="flag_ebank_28" invisible="1"/>
+                        <field name="flag_ebank_32" invisible="1"/>
+                        <field name="flag_ebank_42" invisible="1"/>
+                        <field name="flag_ebank_43" invisible="1"/>
+                        <field name="flag_ebank_45" invisible="1"/>
+                        <field name="flag_ebank_48" invisible="1"/>
+                        <field name="flag_ebank_49" invisible="1"/>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
-        <record id="view_eb_transaction_tree" model="ir.ui.view">
-            <field name="name">eb.transaction.tree</field>
-            <field name="model">eb.transaction</field>
+        <record id="view_ebank_transaction_tree" model="ir.ui.view">
+            <field name="name">ebank.transaction.tree</field>
+            <field name="model">ebank.transaction</field>
             <field name="arch" type="xml">
                 <tree string="Transaction ">
                     <field name="name"/>
-                    <field name="eb_3_transaction_type"/>
-                    <field name="eb_2_service_identifier"/>
+                    <field name="ebank_3_transaction_type"/>
+                    <field name="ebank_2_service_identifier"/>
                 </tree>
             </field>
         </record>
-        <record id="view_eb_transaction_search" model="ir.ui.view">
-            <field name="name">eb.transaction.search</field>
-            <field name="model">eb.transaction</field>
+        <record id="view_ebank_transaction_search" model="ir.ui.view">
+            <field name="name">ebank.transaction.search</field>
+            <field name="model">ebank.transaction</field>
             <field name="arch" type="xml">
                 <search string="Transaction">
                     <field name="name"/>
@@ -82,13 +82,13 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="act_open_eb_transaction_view">
+        <record model="ir.actions.act_window" id="act_open_ebank_transaction_view">
             <field name="name">Transaction</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">eb.transaction</field>
+            <field name="res_model">ebank.transaction</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_eb_transaction_search"/>
+            <field name="search_view_id" ref="view_ebank_transaction_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
