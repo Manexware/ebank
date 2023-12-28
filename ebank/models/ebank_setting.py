@@ -19,8 +19,7 @@ class EBankSetting(models.Model):
         ('name_uk', 'unique(name)', 'Setting must be unique'),
     ]
 
-    @api.one
-    @api.constrains('ebank_32_acquirer_institution','ebank_33_agency_code','ebank_37_acquirer_sequence')
+    @api.constrains('ebank_32_acquirer_institution', 'ebank_33_agency_code', 'ebank_37_acquirer_sequence')
     def _check_num(self):
         if self.ebank_32_acquirer_institution and self.ebank_33_agency_code and self.ebank_37_acquirer_sequence:
             try:
@@ -39,8 +38,7 @@ class EBankSetting(models.Model):
                 raise ValidationError("NAN " + self.ebank_37_acquirer_sequence +
                                       " -> " + self._fields['ebank_37_acquirer_sequence']._column_string)
 
-    @api.one
-    @api.constrains('ebank_34_cashier','ebank_41_terminal')
+    @api.constrains('ebank_34_cashier', 'ebank_41_terminal')
     def _check_al_num(self):
         if self.ebank_34_cashier:
             if not self.ebank_34_cashier.isalnum():
@@ -51,8 +49,7 @@ class EBankSetting(models.Model):
                 raise ValidationError("NAALN " + self.ebank_41_terminal +
                                       " -> " + self._fields['ebank_41_terminal']._column_string)
 
-    @api.one
-    @api.onchange('ebank_32_acquirer_institution','ebank_33_agency_code','ebank_37_acquirer_sequence')
+    @api.onchange('ebank_32_acquirer_institution', 'ebank_33_agency_code', 'ebank_37_acquirer_sequence')
     def _fill_zeros(self):
         if self.ebank_32_acquirer_institution:
             self.ebank_32_acquirer_institution = self.ebank_32_acquirer_institution.zfill(6)
@@ -61,7 +58,6 @@ class EBankSetting(models.Model):
         if self.ebank_37_acquirer_sequence:
             self.ebank_37_acquirer_sequence = self.ebank_37_acquirer_sequence.zfill(12)
 
-    @api.one
     def copy(self, default=None):
         default = dict(default or {})
         copied_count = self.search_count(

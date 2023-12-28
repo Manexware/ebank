@@ -86,7 +86,6 @@
             <field name="name">Transaction</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">ebank.transaction</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_ebank_transaction_search"/>
             <field name="domain">[]</field>

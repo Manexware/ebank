@@ -22,7 +22,7 @@
         'views/setting_view.xml',
         'views/transaction_view.xml',
         'wizard/window_wizard_view.xml',
-        'menu/menu.xml',
+        'views/menu.xml',
     ],
 
 
