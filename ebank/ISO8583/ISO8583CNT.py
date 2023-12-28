@@ -39,14 +39,14 @@ class ISO8583CNT:
 
         iso = ISO8583()
         try:
-            iso.setMTI('0800')
-            iso.setBit(2,2)
-            iso.setBit(4,4)
-            iso.setBit(12,12)
-            iso.setBit(21,21)
-            iso.setBit(17,17)
-            iso.setBit(49,986)
-            iso.setBit(99,99)
+            iso.set_mti('0800')
+            iso.set_bit(2,2)
+            iso.set_bit(4,4)
+            iso.set_bit(12,12)
+            iso.set_bit(21,21)
+            iso.set_bit(17,17)
+            iso.set_bit(49,986)
+            iso.set_bit(99,99)
         except ValueToLarge, e:
                 print ('Value too large :( %s' % e)
         except InvalidMTI, i:
@@ -55,13 +55,13 @@ class ISO8583CNT:
         print ('The Message Type Indication is = %s' %iso.getMTI())
 
         print ('The Bitmap is = %s' %iso.getBitmap())
-        iso.showIsoBits();
+        iso.show_iso_bits();
         print ('This is the ISO8583 complete package %s' % iso.getRawIso())
         print ('This is the ISO8583 complete package to sent over the TCPIP network %s' % iso.getNetworkISO())
 
 """
     # Attributes
-    # Bitsto be set 00000000 -> _BIT_POSITION_1 ... _BIT_POSITION_8
+    # Bits to be set 00000000 -> _BIT_POSITION_1 ... _BIT_POSITION_8
     _BIT_POSITION_1 = 128  # 10 00 00 00
     _BIT_POSITION_2 = 64  # 01 00 00 00
     _BIT_POSITION_3 = 32  # 00 10 00 00
@@ -96,7 +96,7 @@ class ISO8583CNT:
                         10: ['10', 'Conversion rate cardholder billing', 'N', 8, 'n'],
                         11: ['11', 'Systems trace audit number', 'LL', 60, 'n'],
                         12: ['12', 'Date and time local transaction', 'N', 6, 'n'],
-                        13: ['13', 'Fecha transaccion local', 'N', 8, 'n'], 14: ['14', 'Date expiration', 'N', 4, 'n'],
+                        13: ['13', 'Date local transaction', 'N', 8, 'n'], 14: ['14', 'Date expiration', 'N', 4, 'n'],
                         15: ['15', 'Date settlement', 'N', 4, 'n'], 16: ['16', 'Date conversion', 'N', 4, 'n'],
                         17: ['17', 'Date capture', 'N', 4, 'n'], 18: ['18', 'Message error indicator', 'AN', 12, 'an'],
                         19: ['19', 'Country code acquiring institution', 'N', 3, 'n'],
@@ -111,7 +111,7 @@ class ISO8583CNT:
                         29: ['29', 'Reconciliation indicator', 'N', 8, 'n'],
                         30: ['30', 'Amounts original', 'N', 8, 'n'],
                         31: ['31', 'Acquirer reference number', 'N', 8, 'n'],
-                        32: ['32', 'Institucion adquiriente', 'N', 6, 'n'],
+                        32: ['32', 'Acquirer institution', 'N', 6, 'n'],
                         33: ['33', 'Forwarding institution identification code', 'N', 3, 'n'],
                         34: ['34', 'Electronic commerce data', 'LL', 16, 'an'],
                         35: ['35', 'Track 2 data', 'LL', 37, 'n'], 36: ['36', 'Track 3 data', 'LLL', 104, 'n'],
