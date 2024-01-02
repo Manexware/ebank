@@ -1,2 +1,0 @@
-import ebank_setting
-import ebank_transaction
