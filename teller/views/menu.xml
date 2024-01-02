@@ -1,27 +1,27 @@
-<openerp>
+<odoo>
     <data>
-            <menuitem id="eb_main_menu" name="Ebank"
+            <menuitem id="teller_main_menu" name="Teller"
                   sequence="1"/>
 
-            <menuitem id="eb_window"
+            <menuitem id="teller_window"
                       name="Window"
                       action="window_wizard_action"
-                      parent="eb_main_menu"
+                      parent="teller_main_menu"
                       groups="base.group_system"
                       sequence="1"/>
 
-            <menuitem id="eb_transaction"
+            <menuitem id="teller_transaction"
                       name="Transaction"
-                      action="act_open_eb_transaction_view"
-                      parent="eb_main_menu"
+                      action="act_open_teller_transaction_view"
+                      parent="teller_main_menu"
                       groups="base.group_system"
                       sequence="2"/>
 
-            <menuitem id="eb_settings"
+            <menuitem id="teller_settings"
                       name="Settings"
-                      action="act_open_eb_setting_view"
-                      parent="eb_main_menu"
+                      action="act_open_teller_setting_view"
+                      parent="teller_main_menu"
                       groups="base.group_system"
                       sequence="3"/>
     </data>
-</openerp>
+</odoo>

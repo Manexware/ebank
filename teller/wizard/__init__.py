@@ -1,1 +1,1 @@
-import window_wizard
+from . import teller_wizard

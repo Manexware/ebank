@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_teller_teller,teller.teller,model_teller_teller,base.group_user,1,1,1,1
+teller.access_teller_setting,access_teller_setting,teller.model_teller_setting,base.group_user,1,1,1,1
+teller.access_teller_transaction,access_teller_transaction,teller.model_teller_transaction,base.group_user,1,1,1,1
+teller.access_teller_wizard,access_teller_wizard,teller.model_teller_wizard,base.group_user,1,1,1,1
+

@@ -23,7 +23,11 @@ __licence__ = 'GPL V3'
 
 import struct
 
-from ISOErrors import *
+from odoo.addons.teller.ISO8583.ISOErrors import ValueToLarge, BitInexistent, InvalidMTI, InvalidBitType, \
+    InvalidValueType, InvalidIso8583, BitNotSet
+
+
+# from ISOErrors import *
 
 
 class ISO8583CNT:
@@ -31,7 +35,7 @@ class ISO8583CNT:
     Used to create, change, send, receive, parse or work with ISO8593 Package version 1993.
     It's 100% Python :)
     Enjoy it!
-    Licence: GPL Version 3
+    License: GPL Version 3
 
     Example:
         from ISO8583.ISO8583 import ISO8583
@@ -52,7 +56,7 @@ class ISO8583CNT:
         except InvalidMTI, i:
                 print ('This MTI is wrong :( %s' % i)
 
-        print ('The Message Type Indication is = %s' %iso.getMTI())
+        Print ('The Message Type Indication is = %s' %iso.getMTI())
 
         print ('The Bitmap is = %s' %iso.getBitmap())
         iso.show_iso_bits();
@@ -980,7 +984,7 @@ class ISO8583CNT:
     # Method that return ISO8583 to TCPIP network form, with the size in the beginning.
     def get_network_iso(self, big_endian=True):
         """Method that return ISO8583 ASCII package with the size in the beginning
-        By default, it return the package with size represented with big-endian.
+        By default, it returns the package with size represented with big-endian.
         Is the same that:
             import struct
             (...)

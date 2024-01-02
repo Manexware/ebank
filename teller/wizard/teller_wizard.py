@@ -1,223 +1,43 @@
-from odoo import fields, models, api
-from odoo.addons.teller.ISO8583.ISO8583CNT import ISO8583CNT
-from odoo.addons.teller.ISO8583.ISOErrors import InvalidIso8583
+# -*- coding: utf-8 -*-
+import datetime
+import re
 
-import socket
+import pytz
 
-TRANSACTION_TYPE = [
-        ('000001', 'Pay'),
-        ('000002', 'Back'),
-        ('000003', 'Consult'),
-    ]
-    
-CONSULT_CRITERION = [
-        ('001', 'by telephone number'),
-        ('002', 'by financial account'),
-    ]
-    
-SERVICE_TYPE = [
-        ('000', 'TOTAL PAY'),
-        ('001', 'FIXED'),
-        ('002', 'MOBILE'),
-        ('003', 'FIXED INTERNET'),
-        ('004', 'TV'),
-        ('005', 'CNT RECHARGE MOBILE'),
-        ('006', 'CDMA 450 FIXED RECHARGE'),
-    ]
-    
-BACK_REASON = [
-        ('02', 'annulment'),
-        ('03', 'timeout'),
-    ]
-
-PLATFORM = [
-        ('01', 'Fixed'),
-        ('02', 'Mobile'),
-        ('03', 'VTA'),
-        ('04', 'CDMA 450'),
-    ]
-
-STATE = [
-        ('c_f', "c-f"),
-        ('c_m', "c-m"),
-        ('p_f', "p_f"),
-        ('p_m', "p_m"),
-        ('p_v', "p_v"),
-        ('p_c', "p_c"),
-        ('r_f', "r_f"),
-        ('r_m', "r_m"),
-        ('r_v', "r_v"),
-        ('r_c', "r_c"),
-    ]
+from odoo import models, fields, api
+from odoo.addons.teller.models.TellerTransaction import (create_reverse_message, connect, send_message,
+                                                         create_payment_message, create_consultation_message, PLATFORM,
+                                                         STATE, SERVICE_TYPE, CONSULT_CRITERION,
+                                                         BACK_REASON, TRANSACTION_TYPE)
+from odoo.exceptions import ValidationError
 
 
-def create_consultation_message(self):
-    iso = ISO8583CNT()
-    transaction = "200"
-    iso.set_transaction_type(transaction)
-    iso.set_bit(2, self.f2_service_identifier)
-    iso.set_bit(3, self.f3_transaction_type)
-    iso.set_bit(12, self.f12_local_transaction_time)
-    iso.set_bit(13, self.f13_local_transaction_date)
-    iso.set_bit(19, self.f19_consult_criterion)
-    iso.set_bit(23, self.f23_service_type)
-    iso.set_bit(32, self.f32_setting_id.f32_acquirer_institution)
-    iso.set_bit(33, self.f32_setting_id.f33_agency_code)
-    iso.set_bit(34, self.f32_setting_id.f34_cashier)
-    iso.set_bit(37, self.f32_setting_id.f37_acquirer_sequence)
-    iso.set_bit(41, self.f32_setting_id.f41_terminal)
-    return iso.get_raw_iso()
-
-
-def create_reverse_message(self, platform_type=None):
-    iso = ISO8583CNT()
-    transaction = "200"
-    iso.set_transaction_type(transaction)
-    iso.set_bit(2, self.f2_service_identifier)
-    iso.set_bit(3, self.f3_transaction_type)
-    iso.set_bit(4, self.f3_transaction_type)
-    if platform_type == 'V' or platform_type == 'C':
-        iso.set_bit(11, self.f12_local_transaction_time)
-    iso.set_bit(12, self.f13_local_transaction_date)
-    iso.set_bit(13, self.f19_consult_criterion)
-    iso.set_bit(23, self.f23_service_type)
-    if platform_type == 'V' or platform_type == 'C':
-        iso.set_bit(28, self.f32_setting_id)
-    iso.set_bit(32, self.f32_setting_id.f32_acquirer_institution)
-    iso.set_bit(33, self.f32_setting_id.f33_agency_code)
-    if platform_type == 'F' or platform_type == 'M':
-        iso.set_bit(34, self.f32_setting_id.f34_cashier)
-        iso.set_bit(37, self.f32_setting_id.f37_acquirer_sequence)
-    iso.set_bit(41, 986)
-    iso.set_bit(42, 986)
-    if platform_type == 'F' or platform_type == 'M':
-        iso.set_bit(43, 986)
-    if platform_type == 'V' or platform_type == 'C':
-        iso.set_bit(45, self.f45_name_lastname)
-        iso.set_bit(48, 986)
-    if platform_type == 'F' or platform_type == 'M':
-        iso.set_bit(49, 986)
-    return iso.get_raw_iso()
-
-
-def create_payment_message(self, platform_type=None):
-    p = ISO8583CNT()
-    transaction = "200"
-    p.set_transaction_type(transaction)
-    p.set_bit(2, self.f2_service_identifier)
-    p.set_bit(3, self.f3_transaction_type)
-    p.set_bit(4, self.f12_local_transaction_time)
-    if platform_type == 'V' or platform_type == 'C':
-        p.set_bit(11, self.f13_local_transaction_date)
-    p.set_bit(12, self.f19_consult_criterion)
-    p.set_bit(13, self.f23_service_type)
-    if platform_type == 'F' or platform_type == 'M':
-        p.set_bit(15, self.f23_service_type)
-        p.set_bit(23, self.f23_service_type)
-    if platform_type == 'V' or platform_type == 'C':
-        p.set_bit(28, self.f23_service_type)
-    p.set_bit(32, self.f32_setting_id.f32_acquirer_institution)
-    p.set_bit(33, self.f32_setting_id.f33_agency_code)
-    if platform_type == 'F' or platform_type == 'M':
-        p.set_bit(34, self.f32_setting_id.f34_cashier)
-    p.set_bit(37, self.f32_setting_id.f37_acquirer_sequence)
-    p.set_bit(41, 986)
-    if platform_type == 'V' or platform_type == 'C':
-        p.set_bit(45, self.f45_name_lastname)
-        p.set_bit(48, 986)
-    if platform_type == 'F' or platform_type == 'M':
-        p.set_bit(49, 986)
-    else:
-        p.set_bit(7, self.f2_service_identifier)
-        p.set_bit(11, self.f3_transaction_type)
-        p.set_bit(18, self.f12_local_transaction_time)
-        p.set_bit(70, 986)
-    return p.get_raw_iso()
-
-
-def create_control_message(self):
-    p = ISO8583CNT()
-    transaction = "200"
-    p.set_transaction_type(transaction)
-    p.set_bit(7, self.f2_service_identifier)
-    p.set_bit(11, self.f3_transaction_type)
-    p.set_bit(18, self.f12_local_transaction_time)
-    p.set_bit(70, 986)
-    return p.get_raw_iso()
-
-
-def connect(self):
-    for res in socket.getaddrinfo(self.serverIP, self.serverPort, socket.AF_UNSPEC, socket.SOCK_STREAM):
-        af, sock_type, proto, canon_name, sa = res
-        try:
-            self.s = socket.socket(af, sock_type, proto)
-        except socket.error:
-            self.s = None
-            continue
-        try:
-            self.s.connect(sa)
-        except socket.error:
-            self.s.close()
-            self.s = None
-            continue
-        break
-    if self.s is None:
-        print('Could not connect :(')
-        result = False
-    else:
-        result = True
-    return result
-
-
-def send_message(self, message, transaction_type):
-    try:
-        code = "ERROR"
-        data = message + '\n'
-        self.s.send(data)
-        ans = self.s.recv(2048)
-        if ans:
-            if ans != data:
-                iso_ans = ISO8583CNT()
-                iso_ans.set_iso_content(ans)
-                # self.response = isoAns.getRawIso()
-                self.response = iso_ans.get_bit(18)
-                if transaction_type == 3:
-                    self.f4_total_value = iso_ans.get_bit(4)
-                elif transaction_type == 1:
-                    self.f42_pay_id = iso_ans.get_bit(42)
-            else:
-                self.response = code
-        else:
-            self.response = code
-    except InvalidIso8583 as ii:
-        print(ii)
-
-
-class TellerTransaction(models.Model):
-    _name = 'teller.transaction'
-    _description = 'Transaction'
+class TellerWizard(models.TransientModel):
+    _name = 'teller.wizard'
+    _description = 'Teller wizard'
 
     name = fields.Char()
-    f2_service_identifier = fields.Char(size=19)
-    f3_transaction_type = fields.Selection(TRANSACTION_TYPE)
-    platform = fields.Selection(PLATFORM, default='01', required=True)
+    f2_service_identifier = fields.Char(size=19, required=True, default='62464524')
+    f3_transaction_type = fields.Selection(TRANSACTION_TYPE, default='000003', required=True)
     f4_total_value = fields.Float(digits=(18, 2))
     f7_date_time = fields.Char()
-    f11_location_code = fields.Char(size=6)
+    f11_location_code = fields.Char(size=6, default='010150')
     f11_sequential = fields.Char()
-    f12_local_transaction_time = fields.Char(size=6)
-    f13_local_transaction_date = fields.Char(size=8)
-    f15_compensation_date = fields.Char(size=8)
-    f19_consult_criterion = fields.Selection(CONSULT_CRITERION)
-    f23_service_type = fields.Selection(SERVICE_TYPE)
+    f12_local_transaction_time = fields.Char(size=6, compute='_compute_time_now')
+    f13_local_transaction_date = fields.Char(size=8, compute='_compute_date_now')
+    f15_compensation_date = fields.Char(size=8, compute='_compute_date_now')
+    f19_consult_criterion = fields.Selection(CONSULT_CRITERION, default='001')
+    f23_service_type = fields.Selection(SERVICE_TYPE, default='000', required=True)
     f28_doc = fields.Char(size=20)
-    f32_setting_id = fields.Many2one('teller.setting')
+    f32_setting_id = fields.Many2one('teller.setting', required=True)
     f42_pay_id = fields.Char(size=12)
-    f43_back_reason = fields.Selection(BACK_REASON)
-    f45_name_lastname = fields.Char(size=35)
-    f48_address = fields.Char(size=200)
-    f49_currency_type = fields.Char(size=3)
+    f43_back_reason = fields.Selection(BACK_REASON, default='02')
+    f45_name_lastname = fields.Char(size=35, default='Luis Enrique Perez Lopez')
+    f48_address = fields.Char(size=200, default='Polaris')
+    f49_currency_type = fields.Char(size=3, default='USD')
     f70_administrative_transaction_code = fields.Char()
+    platform = fields.Selection(PLATFORM, default='01', required=True)
+    state = fields.Selection(STATE, default='c_f')
     flag_f2 = fields.Boolean(compute='_set_flag', default=False)
     flag_f4 = fields.Boolean(compute='_set_flag', default=False)
     flag_f7 = fields.Boolean(compute='_set_flag', default=False)
@@ -235,15 +55,88 @@ class TellerTransaction(models.Model):
     flag_f48 = fields.Boolean(compute='_set_flag', default=False)
     flag_f49 = fields.Boolean(compute='_set_flag', default=False)
     flag_f70 = fields.Boolean(compute='_set_flag', default=False)
+
     mit = fields.Char()
     telephony = fields.Char()
     response = fields.Char()
 
-    _order = 'name'
+    # Configure the client
+    # serverIP = "130.10.50.15"
+    serverIP = "172.17.222.136"
+    serverPort = 8899
+    numberEcho = 5
+    timeBetweenEcho = 5  # in seconds
 
-    _sql_constraints = [
-        ('name_uk', 'unique(name)', 'Transaction must be unique'),
-    ]
+    bigEndian = True
+    # bigEndian = False
+
+    s = None
+
+    @api.onchange('f2_service_identifier', 'f11_location_code', 'f42_pay_id')
+    def _check_num(self):
+        if self.f2_service_identifier:
+            try:
+                int(self.f2_service_identifier)
+            except ValueError:
+                raise ValidationError("NAN " + self.f2_service_identifier +
+                                      " -> " + self._fields['f2_service_identifier']._column_string)
+        if self.f11_location_code:
+            try:
+                int(self.f11_location_code)
+            except ValueError:
+                raise ValidationError("NAN " + self.f11_location_code +
+                                      " -> " + self._fields['f11_location_code']._column_string)
+        if self.f42_pay_id:
+            try:
+                int(self.f42_pay_id)
+            except ValueError:
+                raise ValidationError("NAN " + self.f42_pay_id +
+                                      " -> " + self._fields['f42_pay_id']._column_string)
+
+    @api.onchange('f28_doc', 'f48_address')
+    def _check_alphanum(self):
+        if self.f28_doc:
+            if not self.f28_doc.isalnum():
+                raise ValidationError("NAALN " + self.f28_doc +
+                                      " -> " + self._fields['f28_doc']._column_string)
+        if self.f48_address:
+            if not self.f48_address.isalnum():
+                raise ValidationError("NAALN " + self.f48_address +
+                                      " -> " + self._fields['f48_address']._column_string)
+
+    @api.onchange('f45_name_lastname')
+    def _check_a(self):
+        if self.f45_name_lastname:
+            r = re.compile("^[a-zA-Z0-9 ]*$")
+            if not r.match(self.f45_name_lastname):
+                raise ValidationError("Not alphanumeric with space " + self.f45_name_lastname +
+                                      " -> " + self._fields['f45_name_lastname']._column_string)
+
+    @api.onchange('f11_location_code', 'f49_currency_type')
+    def _check_size(self):
+        if self.f11_location_code:
+            if len(self.f11_location_code) != 6:
+                raise ValidationError("Check size " + self.f11_location_code +
+                                      " -> " + self._fields['f11_location_code']._column_string)
+        if self.f49_currency_type:
+            if len(self.f49_currency_type) != 3:
+                raise ValidationError("Check size " + self.f49_currency_type +
+                                      " -> " + self._fields['f49_currency_type']._column_string)
+
+    @api.depends('f3_transaction_type')
+    def _compute_time_now(self):
+        tz = pytz.timezone('America/Bogota')
+        self.f12_local_transaction_time = str(datetime.datetime.now(tz).hour).zfill(2) + str(
+            datetime.datetime.now(tz).minute).zfill(2) + str(
+            datetime.datetime.now(tz).second).zfill(2)
+
+    @api.depends('f3_transaction_type')
+    def _compute_date_now(self):
+        tz = pytz.timezone('America/Bogota')
+        self.f13_local_transaction_date = str(datetime.datetime.now(tz).year).zfill(4) + str(
+            datetime.datetime.now(tz).month).zfill(2) + str(
+            datetime.datetime.now(tz).day).zfill(2)
+        self.f15_compensation_date = self.f13_local_transaction_date
 
     @api.depends('f3_transaction_type', 'platform')
     def _set_flag(self):
@@ -440,14 +333,79 @@ class TellerTransaction(models.Model):
             self.flag_f48 = True
             self.flag_f49 = False
 
-    def copy(self, default=None):
-        default = dict(default or {})
-        copied_count = self.search_count(
-            [('name', '=like', u"Copy of {}%".format(self.name))])
-        if not copied_count:
-            new_name = u"Copy of {}".format(self.name)
-        else:
-            new_name = u"Copy of {} ({})".format(self.name, copied_count)
-        default['name'] = new_name
-        return super(TellerTransaction, self).copy(default)
+    def consult(self):
+        self._check_num()
 
+        message = create_consultation_message(self)
+        connect(self)
+        send_message(self, message, 3)
+
+        consult = self.env['teller.transaction']
+        consult.create({'f2_service_identifier': self.f2_service_identifier,
+                        'f3_transaction_type': self.f3_transaction_type,
+                        'f12_local_transaction_time': self.f12_local_transaction_time})
+        self.f3_transaction_type = '000001'
+        return {
+            'context': self.env.context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'teller.wizard',
+            'res_id': self.id,
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
+    def back(self):
+        self._check_num()
+        self._check_alphanum()
+        self._check_size()
+        self._check_a()
+
+        message = create_reverse_message(self, 2)
+        connect(self)
+        send_message(message, 2, 'F')
+
+        back = self.env['teller.transaction']
+        back.create({'f2_service_identifier': self.f2_service_identifier,
+                     'f3_transaction_type': self.f3_transaction_type,
+                     'f12_local_transaction_time': self.f12_local_transaction_time})
+        self.f3_transaction_type = '000003'
+
+        return {
+            'context': self.env.context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'teller.wizard',
+            'res_id': self.id,
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
+    def pay(self):
+        self._check_num()
+        self._check_alphanum()
+        self._check_size()
+        self._check_a()
+
+        message = create_payment_message(self, 1)
+        connect(self)
+        send_message(message, 1, 'F')
+
+        pay = self.env['teller.transaction']
+        pay.create({'f2_service_identifier': self.f2_service_identifier,
+                    'f3_transaction_type': self.f3_transaction_type,
+                    'f12_local_transaction_time': self.f12_local_transaction_time})
+        self.f3_transaction_type = '000001'
+
+        return {
+            'context': self.env.context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'teller.wizard',
+            'res_id': self.id,
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }

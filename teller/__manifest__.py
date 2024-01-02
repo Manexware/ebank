@@ -22,10 +22,10 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/setting_view.xml',
         'views/transaction_view.xml',
-        'wizard/window_wizard_view.xml',
+        'wizard/teller_wizard_view.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

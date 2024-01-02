@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <!-- Setting-->
-        <record id="view_ebank_setting_form" model="ir.ui.view">
-            <field name="name">ebank.setting.form</field>
-            <field name="model">ebank.setting</field>
+        <record id="view_teller_setting_form" model="ir.ui.view">
+            <field name="name">teller.setting.form</field>
+            <field name="model">teller.setting</field>
             <field name="arch" type="xml">
                 <form string="Setting ">
                     <sheet>
@@ -15,33 +15,33 @@
                             </h1>
                         </div>
                         <group>
-                            <field name="ebank_32_acquirer_institution"/>
-                            <field name="ebank_33_agency_code"/>
-                            <field name="ebank_34_cashier"/>
-                            <field name="ebank_37_acquirer_sequence"/>
-                            <field name="ebank_41_terminal"/>
+                            <field name="f32_acquirer_institution"/>
+                            <field name="f33_agency_code"/>
+                            <field name="f34_cashier"/>
+                            <field name="f37_acquirer_sequence"/>
+                            <field name="f41_terminal"/>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
-        <record id="view_ebank_setting_tree" model="ir.ui.view">
-            <field name="name">ebank.setting.tree</field>
-            <field name="model">ebank.setting</field>
+        <record id="view_teller_setting_tree" model="ir.ui.view">
+            <field name="name">teller.setting.tree</field>
+            <field name="model">teller.setting</field>
             <field name="arch" type="xml">
                 <tree string="Setting">
                     <field name="name"/>
-                    <field name="ebank_32_acquirer_institution"/>
-                    <field name="ebank_33_agency_code"/>
-                    <field name="ebank_34_cashier"/>
-                    <field name="ebank_37_acquirer_sequence"/>
-                    <field name="ebank_41_terminal"/>
+                    <field name="f32_acquirer_institution"/>
+                    <field name="f33_agency_code"/>
+                    <field name="f34_cashier"/>
+                    <field name="f37_acquirer_sequence"/>
+                    <field name="f41_terminal"/>
                 </tree>
             </field>
         </record>
-        <record id="view_ebank_setting_search" model="ir.ui.view">
-            <field name="name">ebank.setting.search</field>
-            <field name="model">ebank.setting</field>
+        <record id="view_teller_setting_search" model="ir.ui.view">
+            <field name="name">teller.setting.search</field>
+            <field name="model">teller.setting</field>
             <field name="arch" type="xml">
                 <search string="Setting of Personal Appreciation">
                     <field name="name"/>
@@ -49,12 +49,12 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="act_open_ebank_setting_view">
+        <record model="ir.actions.act_window" id="act_open_teller_setting_view">
             <field name="name">Setting</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ebank.setting</field>
+            <field name="res_model">teller.setting</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_ebank_setting_search"/>
+            <field name="search_view_id" ref="view_teller_setting_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
@@ -64,4 +64,4 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>

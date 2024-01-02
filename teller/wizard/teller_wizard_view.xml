@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="teller_wizard_form" model="ir.ui.view">
+            <field name="name">teller_wizard_form</field>
+            <field name="model">teller.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Window">
+                    <group>
+                        <field name="f3_transaction_type"/>
+                        <field name="platform"/>
+                        <field name="f2_service_identifier" invisible="flag_f2 == False" required="flag_f2 == True"/>
+                        <field name="f4_total_value" invisible="flag_f4 == False" required="flag_f4 == True"/>
+                        <field name="f11_location_code" invisible="flag_f11 == False" required="flag_f11 == True"/>
+                        <field name="f12_local_transaction_time" invisible="flag_f12 == False"
+                               required="flag_f12 == True"/>
+                        <field name="f13_local_transaction_date" invisible="flag_f13 == False"
+                               required="flag_f13 == True"/>
+                        <field name="f15_compensation_date" invisible="flag_f15 == False" required="flag_f15 == True"/>
+                        <field name="f19_consult_criterion" invisible="flag_f19 == False" required="flag_f19 == True"/>
+                        <field name="f23_service_type" invisible="flag_f23 == False" required="flag_f23 == True"/>
+                        <field name="f28_doc" invisible="flag_f28 == False" required="flag_f28 == True"/>
+                        <field name="f32_setting_id" invisible="flag_f32 == False" required="flag_f32 == True"/>
+                        <field name="f42_pay_id" invisible="flag_f42 == False" required="flag_f42 == True"/>
+                        <field name="f43_back_reason" invisible="flag_f43 == False" required="flag_f43 == True"/>
+                        <field name="f45_name_lastname" invisible="flag_f45 == False" required="flag_f45 == True"/>
+                        <field name="f48_address" invisible="flag_f48 == False" required="flag_f48 == True"/>
+                        <field name="f49_currency_type" invisible="flag_f49 == False" required="flag_f49 == True"/>
+                        <field name="response" readonly="1"/>
+                        <field name="flag_f2" invisible="1"/>
+                        <field name="flag_f4" invisible="1"/>
+                        <field name="flag_f11" invisible="1"/>
+                        <field name="flag_f12" invisible="1"/>
+                        <field name="flag_f13" invisible="1"/>
+                        <field name="flag_f15" invisible="1"/>
+                        <field name="flag_f19" invisible="1"/>
+                        <field name="flag_f23" invisible="1"/>
+                        <field name="flag_f28" invisible="1"/>
+                        <field name="flag_f32" invisible="1"/>
+                        <field name="flag_f42" invisible="1"/>
+                        <field name="flag_f43" invisible="1"/>
+                        <field name="flag_f45" invisible="1"/>
+                        <field name="flag_f48" invisible="1"/>
+                        <field name="flag_f49" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="consult" string="Consult" type="object" class="oe_highlight"
+                                invisible="f3_transaction_type != '000003'"/>
+                        <button name="back" string="Back" type="object" class="oe_highlight"
+                                invisible="f3_transaction_type != '000002'"/>
+                        <button name="pay" string="Pay" type="object" class="oe_highlight"
+                                invisible="f3_transaction_type != '000001'"/>
+                        or<button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="window_wizard_action" model="ir.actions.act_window">
+            <field name="name">Window</field>
+            <field name="res_model">teller.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="teller_wizard_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
